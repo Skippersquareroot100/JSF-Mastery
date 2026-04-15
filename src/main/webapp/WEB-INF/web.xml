@@ -5,6 +5,14 @@
          version="4.0">
 
     <!-- 
+        WELD LISTENER (FOR TOMCAT 9):
+        This is REQUIRED for Tomcat to understand CDI annotations like @Named and @Inject.
+    -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+
+    <!-- 
         PROJECT_STAGE:
         - Development: Provides more detailed error messages (good for beginners).
         - Production: Performance optimized, less verbose.

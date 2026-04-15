@@ -50,11 +50,12 @@
                     <h:outputText value="" />
                     <!-- 
                         p:commandButton is an AJAX-enabled button.
-                        action="#{formBean.submit}" calls the submit() method in Phase 5.
+                        action="#{formBean.submit()}" calls the submit() method in Phase 5.
+                        Adding parentheses () ensures JSF knows it's a method call, not a property.
                         update="@form" tells PrimeFaces to refresh the form via AJAX after execution.
                     -->
                     <p:commandButton value="Submit &amp; See Lifecycle"                                
-                                     action="#{formBean.submit}"
+                                     action="#{formBean.submit()}"
                                      update="@form" 
                                      icon="pi pi-check" />
 
