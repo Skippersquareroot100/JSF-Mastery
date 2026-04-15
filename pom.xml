@@ -8,37 +8,66 @@
     <name>JSF-Mastery</name>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <jakartaee.version>10.0.0</jakartaee.version>
-        <jsf.version>4.0.1</jsf.version>
-        <primefaces.version>13.0.0</primefaces.version>
+        <jsf.version>2.3.21</jsf.version>
+        <primefaces.version>12.0.0</primefaces.version>
+        <weld.version>3.1.9.Final</weld.version>
     </properties>
 
     <dependencies>
-        <!-- Jakarta EE Web API (provided by server) -->
+        <!-- Servlet API (Tomcat 9) -->
         <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-web-api</artifactId>
-            <version>${jakartaee.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSF (Mojarra 4.x for Jakarta EE 10) -->
+        <!-- JSF 2.3 (Mojarra) -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.faces</artifactId>
             <version>${jsf.version}</version>
         </dependency>
 
-        <!-- PrimeFaces 13.x for Jakarta EE 10 -->
+        <!-- PrimeFaces 12 (Java EE / javax) -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
-            <classifier>jakarta</classifier>
+        </dependency>
+
+        <!-- CDI (Weld for Tomcat) -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>${weld.version}</version>
+        </dependency>
+
+        <!-- CDI API -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0.SP1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- EL API (Tomcat needs this for CDI injection in JSF) -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -49,8 +78,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

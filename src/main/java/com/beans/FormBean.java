@@ -1,9 +1,9 @@
 package com.beans;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 @Named
 @RequestScoped
@@ -13,18 +13,17 @@ public class FormBean {
 
     @PostConstruct
     public void init() {
-        System.out.println("=== JSF Lifecycle: @PostConstruct (Apply Request Values phase) ===");
-    }
-
-    public String submit() {
-        System.out.println("=== JSF Lifecycle: submit() called (Invoke Application phase) ===");
-        System.out.println("Name value: " + name);
-        return null; // Stay on same page
+        System.out.println(">>> @PostConstruct called (Bean created)");
     }
 
     @PreDestroy
     public void cleanup() {
-        System.out.println("=== JSF Lifecycle: @PreDestroy (Render Response phase completed) ===");
+        System.out.println(">>> @PreDestroy called (Bean destroyed)");
+    }
+
+    public String submit() {
+        System.out.println(">>> submit() method executed - User entered: " + name);
+        return null; // Stay on same page
     }
 
     public String getName() {
@@ -32,7 +31,7 @@ public class FormBean {
     }
 
     public void setName(String name) {
-        System.out.println("Setter called with: " + name);
+        System.out.println(">>> setName() called with value: " + name);
         this.name = name;
     }
 }
