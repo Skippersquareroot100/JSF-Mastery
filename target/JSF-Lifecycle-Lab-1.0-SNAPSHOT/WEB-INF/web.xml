@@ -1,22 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- 
+        WELD LISTENER (FOR TOMCAT 9):
+        This is REQUIRED for Tomcat to understand CDI annotations like @Named and @Inject.
+    -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+
+    <!-- 
+        PROJECT_STAGE:
+        - Development: Provides more detailed error messages (good for beginners).
+        - Production: Performance optimized, less verbose.
+    -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
 
+    <!-- 
+        FACES SERVLET:
+        The engine that runs JSF. Every JSF request must pass through this servlet.
+    -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- 
+        SERVLET MAPPING:
+        Tell Tomcat that any URL ending in .xhtml should be handled by 
+        the Faces Servlet. 
+    -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <!-- 
+        WELCOME FILE:
+        The default page that loads when you visit http://localhost:8080/context-path/
+    -->
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>

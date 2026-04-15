@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!--
+    JSF-Mastery - Beginner-Friendly JSF 2.3 + PrimeFaces 12 Project
+    
+    This is the main JSF page. Notice the XML namespaces at the top:
+    - h: = JSF HTML components (forms, inputs, outputs)
+    - f: = JSF core components (validation, AJAX, converters)
+    - p: = PrimeFaces components (rich UI widgets)
+    
+    HOW JSF WORKS (SIMPLIFIED):
+    1. Browser requests this page
+    2. JSF convertsss XHTML → HTML
+    3. #{formBean.name} connects to FormBean.java
+    4. User submits → JSF calls bean methods automatically
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -7,43 +21,93 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>JSF Lifecycle - Mastery</title>
+        <title>JSF-Mastery - Learn JSF Step by Step</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+            .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+            h1 { color: #2196F3; text-align: center; }
+            .info-box { background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #2196F3; }
+            .success-msg { background: #e8f5e9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #4CAF50; font-size: 1.2em; }
+            .lifecycle-info { background: #fff3e0; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #FF9800; }
+            .lifecycle-info ol { margin-left: 20px; }
+            .lifecycle-info li { margin: 5px 0; }
+        </style>
     </h:head>
 
-    <h:body style="font-family: Arial, sans-serif; margin: 20px;">
+    <h:body>
+        <div class="container">
+            <h1>🎓 JSF-Mastery: Learn JSF Lifecycle</h1>
+            
+            <div class="info-box">
+                <strong>Welcome!</strong> This is a complete JSF 2.3 + PrimeFaces 12 starter project.
+                <br/><br/>
+                <strong>What to do:</strong> Enter your name below and click Submit. 
+                Watch the Tomcat console to see all 6 JSF lifecycle phases in action!
+                <br/><br/>
+                <strong>View logs:</strong> <code>tail -f /path/to/tomcat/logs/catalina.out</code>
+            </div>
 
-        <h1 style="text-align:center; color:#2196F3;">JSF Lifecycle Demo</h1>
+            <h:form id="mainForm">
+                <h:panelGrid columns="2" cellpadding="10" style="margin: 20px auto;">
 
-        <h:form id="mainForm">
+                    <!-- Label for the input field -->
+                    <h:outputLabel value="Enter Your Name:" for="name" style="font-weight: bold;" />
 
-            <h:panelGrid columns="2" cellpadding="10" style="margin: 20px auto;">
+                    <!-- 
+                        PrimeFaces Input Field
+                        value="#{formBean.name}" → Binds to FormBean.java
+                        required="true" → JSF validation (Phase 3)
+                        requiredMessage → Shown if validation fails
+                    -->
+                    <p:inputText id="name"
+                                 value="#{formBean.name}"
+                                 required="true"
+                                 requiredMessage="Name is required!"
+                                 label="Name" />
 
-                <h:outputLabel value="Name: " for="name" />
+                    <h:outputText value="" />
+                    <!-- Shows validation message if user leaves field empty -->
+                    <p:message for="name" />
 
-                <p:inputText id="name"
-                             value="#{formBean.name}"
-                             required="true"
-                             requiredMessage="Name is required"
-                             label="Name" />
+                    <h:outputText value="" />
+                    <!-- 
+                        Submit Button
+                        action="#{formBean.submit}" → Calls submit() in FormBean.java
+                        update="@form" → Re-renders the entire form after submit
+                    -->
+                    <p:commandButton value="Submit"
+                                     action="#{formBean.submit}"
+                                     update="@form"
+                                     icon="pi pi-check" />
 
-                <h:outputText value="" />
-                <p:message for="name" />
+                </h:panelGrid>
 
-                <h:outputText value="" />
-                <p:commandButton value="Submit"                                
-                                 action="#{formBean.submit}"
-                                 update="@form" />
+                <!-- 
+                    This message appears ONLY when formBean.name has a value.
+                    #{not empty formBean.name} → JSF Expression Language (EL)
+                -->
+                <h:panelGroup rendered="#{not empty formBean.name}" 
+                              layout="block" 
+                              class="success-msg">
+                    ✅ Hello, <strong>#{formBean.name}</strong>! Welcome to JSF!
+                    <br/>
+                    <small style="color: #666;">Check your Tomcat console to see the JSF lifecycle phases.</small>
+                </h:panelGroup>
+            </h:form>
 
-            </h:panelGrid>
-
-            <h:panelGroup rendered="#{not empty formBean.name}" 
-                          layout="block" 
-                          style="text-align:center; margin-top:20px; font-size:1.2em; color:#4CAF50;">
-                Hello, <strong>#{formBean.name}</strong>!
-            </h:panelGroup>
-
-        </h:form>
-
+            <div class="lifecycle-info">
+                <strong>📊 The 6 Phases of JSF Lifecycle (on form submit):</strong>
+                <ol>
+                    <li><strong>RESTORE_VIEW</strong> → Rebuild component tree from saved state</li>
+                    <li><strong>APPLY_REQUEST_VALUES</strong> → Extract submitted values from HTTP request</li>
+                    <li><strong>PROCESS_VALIDATIONS</strong> → Validate all input fields (required, length, regex, etc.)</li>
+                    <li><strong>UPDATE_MODEL_VALUES</strong> → Update bean properties (setName() called here!)</li>
+                    <li><strong>INVOKE_APPLICATION</strong> → Execute action methods (submit() called here!)</li>
+                    <li><strong>RENDER_RESPONSE</strong> → Generate HTML and send back to browser</li>
+                </ol>
+                <em>On initial page load (GET), only phases 1 and 6 execute.</em>
+            </div>
+        </div>
     </h:body>
 </html>
