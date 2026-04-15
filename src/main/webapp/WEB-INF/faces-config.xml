@@ -3,9 +3,19 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-                                  http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+                                   http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+
+    <!-- 
+        JSF CONFIGURATION:
+        Use this file to register converters, validators, 
+        and lifecycle listeners.
+    -->
 
     <lifecycle>
+        <!-- 
+            This registers our custom PhaseListener so it can 
+            log each phase of the JSF lifecycle to the console.
+        -->
         <phase-listener>com.beans.LifecyclePhaseListener</phase-listener>
     </lifecycle>
 

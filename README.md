@@ -4,6 +4,15 @@ A complete, working Java EE 8 (JSF 2.3 + PrimeFaces 12) web application configur
 
 ---
 
+## 🎯 Why this project?
+If you are a beginner struggling to set up a Java EE / JSF project, this is for you.
+- **Pull & Play**: Just clone and run. No complex setup.
+- **Educational Comments**: Every file (`pom.xml`, `web.xml`, `index.xhtml`, `FormBean.java`) is loaded with comments explaining **WHY** we use each part.
+- **Lifecycle Visualization**: Includes a PhaseListener that logs all 6 JSF phases to your console so you can see the magic happen.
+- **PrimeFaces Ready**: Pre-configured with PrimeFaces 12 for beautiful UI components.
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites

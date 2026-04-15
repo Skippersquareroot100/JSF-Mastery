@@ -7,6 +7,10 @@
     <packaging>war</packaging>
     <name>JSF-Mastery</name>
 
+    <!-- 
+        PROPERTIES:
+        Define versions here so they are easy to update in one place.
+    -->
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -18,7 +22,10 @@
     </properties>
 
     <dependencies>
-        <!-- Servlet API (Tomcat 9) -->
+        <!-- 
+            SERVLET API (Tomcat 9):
+            'provided' means Tomcat already has this JAR, so don't include it in our WAR.
+        -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -26,21 +33,31 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSF 2.3 (Mojarra) -->
+        <!-- 
+            JSF 2.3 (Mojarra):
+            The reference implementation of JSF (JavaServer Faces).
+        -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.faces</artifactId>
             <version>${jsf.version}</version>
         </dependency>
 
-        <!-- PrimeFaces 12 (Java EE / javax) -->
+        <!-- 
+            PRIMEFACES 12:
+            The UI component library. Version 12 is for Java EE (javax packages).
+        -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
         </dependency>
 
-        <!-- CDI (Weld for Tomcat) -->
+        <!-- 
+            CDI (Weld for Tomcat):
+            Tomcat is a servlet container, not a full Java EE server.
+            We need Weld to enable @Inject and @Named CDI features.
+        -->
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-core</artifactId>
@@ -63,7 +80,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL -->
+        <!-- JSTL: Standard Tag Library for XML views -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -73,6 +90,7 @@
 
     <build>
         <plugins>
+            <!-- Compiler plugin sets the Java version for your code -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -82,6 +100,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!-- WAR plugin packages your app into a .war file for deployment -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
