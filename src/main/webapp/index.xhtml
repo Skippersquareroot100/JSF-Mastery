@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jakarta.ee/jsf/html"
-      xmlns:f="http://xmlns.jakarta.ee/jsf/core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Lifecycle Test</title>
+    <title>JSF Lifecycle - Mastery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
 
 <h:body>
 
-<h:form>
+<h1 style="text-align:center; color:#2196F3;">JSF Lifecycle Demo</h1>
 
-    <p:outputLabel value="Name: " />
+<h:form id="mainForm">
 
-    <p:inputText id="name"
-                 value="#{formBean.name}"
-                 required="true"
-                 requiredMessage="Name is required" />
+    <h:panelGrid columns="2" cellpadding="10" style="margin: 20px auto;">
 
-    <p:message for="name" />
+        <p:outputLabel value="Name: " for="name" />
 
-    <br/><br/>
+        <p:inputText id="name"
+                     value="#{formBean.name}"
+                     required="true"
+                     requiredMessage="Name is required"
+                     label="Name" />
 
-    <p:commandButton value="Submit"
-                     action="#{formBean.submit}"
-                     update="@form" />
+        <h:outputText value="" />
+        <p:message for="name" />
+
+        <h:outputText value="" />
+        <p:commandButton value="Submit"
+                         action="#{formBean.submit}"
+                         update="@form"
+                         icon="pi pi-check" />
+
+    </h:panelGrid>
+
+    <h:panelGroup rendered="#{not empty formBean.name}" 
+                  layout="block" 
+                  style="text-align:center; margin-top:20px; font-size:1.2em; color:#4CAF50;">
+        Hello, <strong>#{formBean.name}</strong>!
+    </h:panelGroup>
 
 </h:form>
 

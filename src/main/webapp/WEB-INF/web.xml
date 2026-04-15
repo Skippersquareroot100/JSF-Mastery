@@ -1,5 +1,6 @@
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-         version="5.0">
+         version="6.0"
+         metadata-complete="false">
 
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>

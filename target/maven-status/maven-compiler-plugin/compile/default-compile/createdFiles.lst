@@ -1,4 +1,4 @@
-com\mycompany\jsf\lifecycle\lab\JakartaRestConfiguration.class
-com\lifecycle\LifecycleLogger.class
-com\beans\FormBean.class
-com\mycompany\jsf\lifecycle\lab\resources\JakartaEE8Resource.class
+com/lifecycle/LifecycleLogger.class
+com/mycompany/jsf/lifecycle/lab/JakartaRestConfiguration.class
+com/beans/FormBean.class
+com/mycompany/jsf/lifecycle/lab/resources/JakartaEE8Resource.class

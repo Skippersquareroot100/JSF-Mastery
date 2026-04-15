@@ -1,26 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.beans;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
-/**
- *
- * @author maruf.anik
- */
 @Named
 @RequestScoped
 public class FormBean {
-    
-    
-     private String name;
+
+    private String name;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("=== JSF Lifecycle: @PostConstruct (Apply Request Values phase) ===");
+    }
 
     public String submit() {
-        System.out.println("SUBMIT METHOD CALLED");
-        return null;
+        System.out.println("=== JSF Lifecycle: submit() called (Invoke Application phase) ===");
+        System.out.println("Name value: " + name);
+        return null; // Stay on same page
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        System.out.println("=== JSF Lifecycle: @PreDestroy (Render Response phase completed) ===");
     }
 
     public String getName() {
@@ -28,8 +32,7 @@ public class FormBean {
     }
 
     public void setName(String name) {
+        System.out.println("Setter called with: " + name);
         this.name = name;
     }
-    
-    
 }

@@ -1,20 +1,22 @@
 package com.mycompany.jsf.lifecycle.lab.resources;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Response;
 
 /**
- *
- * @author 
+ * Jakarta REST Resource
+ * @author maruf.anik
  */
-@Path("rest")
+@Path("/jakartaee8")
 public class JakartaEE8Resource {
     
     @GET
-    public Response ping(){
+    public Response ping() {
         return Response
-                .ok("ping")
+                .ok()
+                .entity("Ping from JakartaEE")
                 .build();
     }
 }
